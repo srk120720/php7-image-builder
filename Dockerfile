@@ -18,6 +18,9 @@ RUN apt-get install -y \
     libpng-dev \
     libonig-dev \
     libzip-dev \
+    libfreetype6-dev \
+    libmcrypt-dev \
+    libjpeg-dev \
     curl \
     zip \
     unzip \
@@ -30,7 +33,9 @@ RUN apt-get install -y \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip opcache
+RUN docker-php-ext-install pdo_mysql exif pcntl bcmath zip opcache
+RUN docker-php-ext-configure gd --with-freetype \
+    && docker-php-ext-install gd
 
 RUN pecl install -o -f redis \
     &&  rm -rf /tmp/pear \
