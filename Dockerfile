@@ -46,21 +46,21 @@ RUN sed -ri "s/post_max_size = 8M/post_max_size = 128M/g" "$PHP_INI_DIR/php.ini"
 RUN sed -ri "s/upload_max_filesize = 2M/upload_max_filesize = 32M/g" "$PHP_INI_DIR/php.ini"
 RUN sed -ri "s/memory_limit = 128M/memory_limit = 256M/g" "$PHP_INI_DIR/php.ini"
 
-RUN echo 'opcache.enable=1 \n\
-opcache.enable_cli=1 \n\
-opcache.memory_consumption=512 \n\
-opcache.interned_strings_buffer=64 \n\
-opcache.max_accelerated_files=32531 \n\
-opcache.validate_timestamps=0 \n\
-opcache.save_comments=1 \n\
-opcache.fast_shutdown=0' >> "$PHP_INI_DIR/conf.d/10-opcache.ini"
+#RUN echo 'opcache.enable=1 \n\
+#opcache.enable_cli=1 \n\
+#opcache.memory_consumption=512 \n\
+#opcache.interned_strings_buffer=64 \n\
+#opcache.max_accelerated_files=32531 \n\
+#opcache.validate_timestamps=0 \n\
+#opcache.save_comments=1 \n\
+#opcache.fast_shutdown=0' >> "$PHP_INI_DIR/conf.d/10-opcache.ini"
 
 ARG php_fpm_conf=/usr/local/etc/php-fpm.d/www.conf
 RUN sed -ri "s/pm.max_children = 5/pm.max_children = 50/g" $php_fpm_conf
 RUN sed -ri "s/pm.start_servers = 2/pm.start_servers = 20/g" $php_fpm_conf
 RUN sed -ri "s/pm.min_spare_servers = 1/pm.min_spare_servers = 10/g" $php_fpm_conf
 RUN sed -ri "s/pm.max_spare_servers = 3/pm.max_spare_servers = 30/g" $php_fpm_conf
-RUN sed -ri "s/pm.max_requests = 500/pm.max_requests = 5000/g" $php_fpm_conf
+RUN sed -ri "s/;pm.max_requests = 500/pm.max_requests = 5000/g" $php_fpm_conf
 RUN sed -ri "s/;request_terminate_timeout = 0/request_terminate_timeout = 30/g" $php_fpm_conf
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
