@@ -61,7 +61,7 @@ RUN sed -ri "s/pm.start_servers = 2/pm.start_servers = 20/g" $php_fpm_conf
 RUN sed -ri "s/pm.min_spare_servers = 1/pm.min_spare_servers = 10/g" $php_fpm_conf
 RUN sed -ri "s/pm.max_spare_servers = 3/pm.max_spare_servers = 30/g" $php_fpm_conf
 RUN sed -ri "s/;pm.max_requests = 500/pm.max_requests = 5000/g" $php_fpm_conf
-RUN sed -ri "s/;request_terminate_timeout = 0/request_terminate_timeout = 30/g" $php_fpm_conf
+#RUN sed -ri "s/;request_terminate_timeout = 0/request_terminate_timeout = 30/g" $php_fpm_conf
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
