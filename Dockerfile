@@ -35,7 +35,7 @@ RUN apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install pdo_mysql exif pcntl bcmath zip opcache
-RUN docker-php-ext-configure gd --with-freetype \
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd \
     && docker-php-ext-install intl mysqli
 
