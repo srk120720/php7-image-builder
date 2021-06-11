@@ -45,7 +45,7 @@ RUN pecl install -o -f redis \
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 RUN sed -ri "s/post_max_size = 8M/post_max_size = 128M/g" "$PHP_INI_DIR/php.ini"
-RUN sed -ri "s/upload_max_filesize = 2M/upload_max_filesize = 32M/g" "$PHP_INI_DIR/php.ini"
+RUN sed -ri "s/upload_max_filesize = 2M/upload_max_filesize = 64M/g" "$PHP_INI_DIR/php.ini"
 RUN sed -ri "s/memory_limit = 128M/memory_limit = 256M/g" "$PHP_INI_DIR/php.ini"
 
 #RUN echo 'opcache.enable=1 \n\
